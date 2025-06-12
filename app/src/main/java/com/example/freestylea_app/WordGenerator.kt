@@ -1,9 +1,5 @@
 package com.example.freestylea_app
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -103,7 +99,17 @@ class WordGenerator {
    )
 
    private var job: Job? = null
-   var delay = 10_000L // 10 seconds
+
+   private var delay = 10_000L // 10 seconds
+
+    public fun getDelay(): Long {
+      return delay
+    }
+
+    public fun setDelay(newDelay: Long) {
+      delay = newDelay
+    }
+
    fun startWordStream(onWord: (String) -> Unit) {
      job = CoroutineScope(Dispatchers.Main).launch {
        while (true) {
