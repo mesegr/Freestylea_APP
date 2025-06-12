@@ -1,5 +1,16 @@
 package com.example.freestylea_app
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+
 class WordGenerator {
 
    val base_palabras = arrayOf(
@@ -90,5 +101,17 @@ class WordGenerator {
     "picaporte","pomo","cabilla","almohadilla","canasto","escotilla","bombilla","palillero","claxon","rejón","tranca","timón","abrelatas","ménsula","clip","estribera","marquesina","felpudo","gatera","cerradura"
 
    )
+
+   private var job: Job? = null
+   var delay = 10_000L // 10 seconds
+   fun startWordStream(onWord: (String) -> Unit) {
+     job = CoroutineScope(Dispatchers.Main).launch {
+       while (true) {
+        val word = base_palabras.random()
+        onWord(word)
+        delay(delay)
+       }
+     }
+   }
 
 }
