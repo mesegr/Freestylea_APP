@@ -1,5 +1,6 @@
 package com.example.freestylea_app
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,8 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.Brush
 
 @Composable
 fun UI() {
@@ -120,6 +127,14 @@ fun BotonesDelay(
     onDelayChange: (Long) -> Unit
 ) {
     val delays = delayValues.keys.toList()
+    val gradient = Brush.horizontalGradient(
+        colors = listOf(
+            Color(0xFFFF00AA), // Rosa
+            Color(0xFF0037FF), // Azul
+            Color(0xFF4CC9FF)  // Azul cielo
+        )
+    )
+
 
     Row(
         modifier = Modifier
@@ -132,11 +147,27 @@ fun BotonesDelay(
             Button(
                 onClick = { onDelayChange(delayValue) },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (selectedDelayText == texto) Color.Green else Color.Red
+                    containerColor = if (selectedDelayText == texto) Color.Green else Color.Transparent,
+
                 ),
-                modifier = Modifier.weight(1f).padding(horizontal = 4.dp, vertical = 20.dp)
+                modifier = Modifier.weight(1f)
+                    .padding(horizontal = 4.dp, vertical = 20.dp)
+                    .background(gradient,
+                        shape = RoundedCornerShape(
+                        topStart = 50.dp,
+                        topEnd = 50.dp,
+                        bottomEnd = 50.dp,
+                        bottomStart = 50.dp
+                    )
+                    )
+
             ) {
-                Text(texto, fontSize = 28.sp, color = Color.White)
+                Text(
+                    texto,
+                    fontSize = 28.sp,
+                    color = Color.White,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
             }
         }
     }
