@@ -21,10 +21,16 @@ import com.example.freestylea_app.R
 fun Tematica(themeGenerator: ThemeGenerator, onBack: () -> Unit) {
     var tematica by remember { mutableStateOf("") }
 
-    LaunchedEffect(Unit) {
+    // Función para actualizar la temática
+    fun actualizarTematica() {
         themeGenerator.getRandomTheme { nuevaTematica ->
             tematica = nuevaTematica
         }
+    }
+
+    // Cargar temática al entrar
+    LaunchedEffect(Unit) {
+        actualizarTematica()
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -39,7 +45,6 @@ fun Tematica(themeGenerator: ThemeGenerator, onBack: () -> Unit) {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            // Botón de volver arriba a la izquierda
             val gradient = Brush.horizontalGradient(
                 colors = listOf(
                     Color(0xFFFF00AA),
@@ -52,8 +57,9 @@ fun Tematica(themeGenerator: ThemeGenerator, onBack: () -> Unit) {
                     .fillMaxWidth()
                     .padding(bottom = 16.dp),
                 verticalAlignment = Alignment.Top,
-                horizontalArrangement = Arrangement.Start
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                // Botón volver (izquierda)
                 Button(
                     onClick = onBack,
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
@@ -69,8 +75,23 @@ fun Tematica(themeGenerator: ThemeGenerator, onBack: () -> Unit) {
                         maxLines = 1
                     )
                 }
+                // Botón cambiar temática (derecha)
+                Button(
+                    onClick = { actualizarTematica() },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                    modifier = Modifier
+                        .padding(horizontal = 4.dp, vertical = 4.dp)
+                        .background(gradient, shape = RoundedCornerShape(50.dp))
+                        .height(44.dp)
+                ) {
+                    Text(
+                        "Cambiar temática",
+                        fontSize = 26.sp,
+                        color = Color.White,
+                        maxLines = 1
+                    )
+                }
             }
-            // Espacio para centrar el texto
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -78,7 +99,7 @@ fun Tematica(themeGenerator: ThemeGenerator, onBack: () -> Unit) {
             ) {
                 Text(
                     text = tematica,
-                    fontSize = 75.sp,
+                    fontSize = 76.sp,
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                     color = Color.White
                 )
