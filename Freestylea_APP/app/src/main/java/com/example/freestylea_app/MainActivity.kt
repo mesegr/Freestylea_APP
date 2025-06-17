@@ -13,6 +13,8 @@ import com.example.freestylea_app.themes.Tematica
 import com.example.freestylea_app.words.UIWords
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
+import com.example.freestylea_app.Terminaciones.Terminacion
+import com.example.freestylea_app.Terminaciones.terminacionGenerator
 import com.example.freestylea_app.UIMainMenu
 import com.example.freestylea_app.themes.Tematica
 import com.example.freestylea_app.themes.ThemeGenerator
@@ -24,15 +26,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             var pantallaActual by remember { mutableStateOf("menu") }
             val themeGenerator = remember { ThemeGenerator() }
+            val terminacionGenerator = remember { terminacionGenerator() }
 
             when (pantallaActual) {
                 "menu" -> UIMainMenu(
                     onBotonPalabrasClick = { pantallaActual = "palabras" },
-                    onBotonTematicasClick = { pantallaActual = "tematicas" }
+                    onBotonTematicasClick = { pantallaActual = "tematicas" },
+                    onBotonTerminacionesClick = { pantallaActual = "terminaciones" }
                 )
                 "palabras" -> UIWords(onBack = { pantallaActual = "menu" })
                 "tematicas" -> Tematica(
                     themeGenerator = themeGenerator,
+                    onBack = { pantallaActual = "menu" }
+                )
+                "terminaciones" -> Terminacion(
+                    themeGenerator = terminacionGenerator,
                     onBack = { pantallaActual = "menu" }
                 )
             }
@@ -51,7 +59,8 @@ fun PantallaPrincipal() {
         mostrarTematicas -> Tematica(themeGenerator = themeGenerator, onBack = { mostrarTematicas = false })
         else -> UIMainMenu(
             onBotonPalabrasClick = { mostrarPalabras = true },
-            onBotonTematicasClick = { mostrarTematicas = true }
+            onBotonTematicasClick = { mostrarTematicas = true },
+            onBotonTerminacionesClick = { mostrarTematicas = true }
         )
     }
 }

@@ -34,7 +34,8 @@ import androidx.compose.ui.unit.TextUnit
 @Composable
 fun UIMainMenu(
     onBotonPalabrasClick: () -> Unit,
-    onBotonTematicasClick: () -> Unit
+    onBotonTematicasClick: () -> Unit,
+    onBotonTerminacionesClick: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -77,7 +78,7 @@ fun UIMainMenu(
                 )
                 Buttons(
                     text = "Terminaciones",
-                    onClick = { /* Acción del tercer botón */ },
+                    onClick = onBotonTerminacionesClick,
                     fontSize = 34.sp,
                     buttonWidth = 260.dp,
                     buttonHeight = 160.dp
