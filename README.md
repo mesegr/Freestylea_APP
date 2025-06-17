@@ -26,7 +26,7 @@ Challenge yourself and boost your creativity, flow, and improvisation skills!
 
 You can download the app here:
 
-- [Download Freestylea 1.0.0](https://github.com/mesegr/Freestylea_APP/releases/download/V1.0.0/Freestylea.apk)
+- [Download Freestylea 1.0.0](https://github.com/mesegr/Freestylea_APP/releases/tag/V1.0.0)
 
 ---
 
