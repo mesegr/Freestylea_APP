@@ -145,7 +145,7 @@ fun BotonesDelay(
             onClick = onBack,
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             modifier = Modifier
-                .padding(horizontal = 20.dp, vertical = 21.dp)
+                .padding(horizontal = 20.dp, vertical = 6.dp)
                 .background(gradient, shape = RoundedCornerShape(50.dp))
                 .weight(0.92f)
                 .height(44.dp)
@@ -172,7 +172,7 @@ fun BotonesDelay(
                 ),
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 4.dp, vertical = 20.dp)
+                    .padding(horizontal = 4.dp, vertical = 6.dp)
                     .background(gradient, shape = RoundedCornerShape(50.dp))
             ) {
                 Text(
