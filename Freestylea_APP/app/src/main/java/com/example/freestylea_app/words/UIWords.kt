@@ -1,4 +1,4 @@
-package com.example.freestylea_app
+package com.example.freestylea_app.words
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,13 +25,15 @@ import androidx.compose.ui.unit.sp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.graphics.Brush
+import com.example.freestylea_app.R
 
 @Composable
-fun UIWords() {
+fun UIWords(onBack: () -> Unit) {
     val wordGenerator = remember { WordGenerator() }
     val delayValues = mapOf(
         "2s" to 2_000L,
@@ -59,11 +61,13 @@ fun UIWords() {
             BotonesDelay(
                 selectedDelayText = delayText,
                 wordGenerator = wordGenerator,
-                delayValues = delayValues
-            ) { newDelay ->
-                wordGenerator.setDelay(newDelay)
-                selectedDelay = newDelay
-            }
+                delayValues = delayValues,
+                onDelayChange = { newDelay ->
+                    wordGenerator.setDelay(newDelay)
+                    selectedDelay = newDelay
+                },
+                onBack = onBack
+            )
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -99,7 +103,7 @@ fun Palabra(wordGenerator: WordGenerator) {
         text = palabra,
         fontSize = 75.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.Black
+        color = Color.White
     )
 }
 
@@ -109,7 +113,7 @@ fun Tiempo(delay: String) {
         text = "Palabras cada $delay",
         fontSize = 40.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.Black
+        color = Color.White
     )
 }
 
@@ -118,17 +122,17 @@ fun BotonesDelay(
     selectedDelayText: String,
     wordGenerator: WordGenerator,
     delayValues: Map<String, Long>,
-    onDelayChange: (Long) -> Unit
+    onDelayChange: (Long) -> Unit,
+    onBack: () -> Unit
 ) {
     val delays = delayValues.keys.toList()
     val gradient = Brush.horizontalGradient(
         colors = listOf(
-            Color(0xFFFF00AA), // Rosa
-            Color(0xFF0037FF), // Azul
-            Color(0xFF4CC9FF)  // Azul cielo
+            Color(0xFFFF00AA),
+            Color(0xFF0037FF),
+            Color(0xFF4CC9FF)
         )
     )
-
 
     Row(
         modifier = Modifier
@@ -136,25 +140,40 @@ fun BotonesDelay(
             .padding(bottom = 16.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
+        // Botón de volver atrás
+        Button(
+            onClick = onBack,
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 21.dp)
+                .background(gradient, shape = RoundedCornerShape(50.dp))
+                .weight(0.92f)
+                .height(44.dp)
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    "<--", // Flecha hacia atrás
+                    fontSize = 18.sp,
+                    color = Color.White,
+                    maxLines = 1
+                )
+            }
+        }
+        // Botones de delay
         delays.forEach { texto ->
             val delayValue = delayValues[texto] ?: 2_000L
             Button(
                 onClick = { onDelayChange(delayValue) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (selectedDelayText == texto) Color.Green else Color.Transparent,
-
                 ),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
                     .padding(horizontal = 4.dp, vertical = 20.dp)
-                    .background(gradient,
-                        shape = RoundedCornerShape(
-                        topStart = 50.dp,
-                        topEnd = 50.dp,
-                        bottomEnd = 50.dp,
-                        bottomStart = 50.dp
-                    )
-                    )
-
+                    .background(gradient, shape = RoundedCornerShape(50.dp))
             ) {
                 Text(
                     texto,

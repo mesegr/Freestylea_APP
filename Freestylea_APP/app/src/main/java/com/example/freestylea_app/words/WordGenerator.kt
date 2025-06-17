@@ -1,4 +1,4 @@
-package com.example.freestylea_app
+package com.example.freestylea_app.words
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -119,5 +119,4 @@ class WordGenerator {
        }
      }
    }
-
 }
