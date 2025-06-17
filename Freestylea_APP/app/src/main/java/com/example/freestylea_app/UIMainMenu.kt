@@ -32,7 +32,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
-fun UIMainMenu(onBotonClick: () -> Unit) {
+fun UIMainMenu(
+    onBotonPalabrasClick: () -> Unit,
+    onBotonTematicasClick: () -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -60,21 +63,21 @@ fun UIMainMenu(onBotonClick: () -> Unit) {
             ) {
                 Buttons(
                     text = "Tematicas",
-                    onClick = { /* Acción del segundo botón */ },
+                    onClick = onBotonTematicasClick,
                     fontSize = 35.sp,
                     buttonWidth = 260.dp,
                     buttonHeight = 160.dp
                 )
                 Buttons(
                     text = "Palabras aleatorias",
-                    onClick = onBotonClick,
+                    onClick = onBotonPalabrasClick,
                     fontSize = 35.sp,
                     buttonWidth = 200.dp,
                     buttonHeight = 180.dp
                 )
                 Buttons(
                     text = "Terminaciones",
-                    onClick = { /* Acción del segundo botón */ },
+                    onClick = { /* Acción del tercer botón */ },
                     fontSize = 34.sp,
                     buttonWidth = 260.dp,
                     buttonHeight = 160.dp
