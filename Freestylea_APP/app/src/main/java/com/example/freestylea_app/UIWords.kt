@@ -31,7 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.graphics.Brush
 
 @Composable
-fun UI() {
+fun UIWords() {
     val wordGenerator = remember { WordGenerator() }
     val delayValues = mapOf(
         "2s" to 2_000L,
