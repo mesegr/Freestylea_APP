@@ -2,11 +2,15 @@ package com.example.freestylea_app.words
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -33,6 +37,7 @@ import androidx.compose.ui.graphics.Brush
 import com.example.freestylea_app.R
 
 @Composable
+@OptIn(ExperimentalLayoutApi::class)
 fun UIWords(onBack: () -> Unit) {
     val wordGenerator = remember { WordGenerator() }
     val delayValues = mapOf(
@@ -46,7 +51,12 @@ fun UIWords(onBack: () -> Unit) {
     var selectedDelay by remember { mutableStateOf(wordGenerator.getDelay()) }
     val delayText = delayValues.entries.find { it.value == selectedDelay }?.key ?: "2s"
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxSize()
+            .safeDrawingPadding()
+    ) {
+        val responsiveWidth = maxWidth
         Image(
             painter = painterResource(id = R.drawable.fondo),
             contentDescription = null,
@@ -66,7 +76,8 @@ fun UIWords(onBack: () -> Unit) {
                     wordGenerator.setDelay(newDelay)
                     selectedDelay = newDelay
                 },
-                onBack = onBack
+                onBack = onBack,
+                textSize = (responsiveWidth.value * 0.07f).coerceIn(18f, 28f).sp
             )
             Box(
                 modifier = Modifier
@@ -75,7 +86,10 @@ fun UIWords(onBack: () -> Unit) {
                     .padding(bottom = 30.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Palabra(wordGenerator)
+                Palabra(
+                    wordGenerator = wordGenerator,
+                    textSize = (responsiveWidth.value * 0.19f).coerceIn(42f, 75f).sp
+                )
             }
             Box(
                 modifier = Modifier
@@ -83,14 +97,17 @@ fun UIWords(onBack: () -> Unit) {
                     .padding(bottom = 1.dp),
                 contentAlignment = Alignment.BottomCenter
             ) {
-                Tiempo(delayText)
+                Tiempo(
+                    delay = delayText,
+                    textSize = (responsiveWidth.value * 0.10f).coerceIn(24f, 40f).sp
+                )
             }
         }
     }
 }
 
 @Composable
-fun Palabra(wordGenerator: WordGenerator) {
+fun Palabra(wordGenerator: WordGenerator, textSize: androidx.compose.ui.unit.TextUnit) {
     var palabra by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
@@ -101,29 +118,37 @@ fun Palabra(wordGenerator: WordGenerator) {
 
     Text(
         text = palabra,
-        fontSize = 75.sp,
+        fontSize = textSize,
         fontWeight = FontWeight.Bold,
-        color = Color.White
+        color = Color.White,
+        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp)
     )
 }
 
 @Composable
-fun Tiempo(delay: String) {
+fun Tiempo(delay: String, textSize: androidx.compose.ui.unit.TextUnit) {
     Text(
         text = "Palabras cada $delay",
-        fontSize = 40.sp,
+        fontSize = textSize,
         fontWeight = FontWeight.Bold,
-        color = Color.White
+        color = Color.White,
+        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+        modifier = Modifier.fillMaxWidth()
     )
 }
 
 @Composable
+@OptIn(ExperimentalLayoutApi::class)
 fun BotonesDelay(
     selectedDelayText: String,
     wordGenerator: WordGenerator,
     delayValues: Map<String, Long>,
     onDelayChange: (Long) -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    textSize: androidx.compose.ui.unit.TextUnit
 ) {
     val delays = delayValues.keys.toList()
     val gradient = Brush.horizontalGradient(
@@ -134,11 +159,13 @@ fun BotonesDelay(
         )
     )
 
-    Row(
+    FlowRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        maxItemsInEachRow = 4
     ) {
         // Botón de volver atrás
         Button(
@@ -147,7 +174,7 @@ fun BotonesDelay(
             modifier = Modifier
                 .padding(horizontal = 20.dp, vertical = 6.dp)
                 .background(gradient, shape = RoundedCornerShape(50.dp))
-                .weight(0.92f)
+                .weight(1f)
                 .height(44.dp)
         ) {
             Box(
@@ -156,7 +183,7 @@ fun BotonesDelay(
             ) {
                 Text(
                     "<--", // Flecha hacia atrás
-                    fontSize = 18.sp,
+                    fontSize = textSize,
                     color = Color.White,
                     maxLines = 1
                 )
@@ -171,13 +198,13 @@ fun BotonesDelay(
                     containerColor = if (selectedDelayText == texto) Color.Green else Color.Transparent,
                 ),
                 modifier = Modifier
-                    .weight(1f)
+                .weight(1f)
                     .padding(horizontal = 4.dp, vertical = 6.dp)
                     .background(gradient, shape = RoundedCornerShape(50.dp))
             ) {
                 Text(
                     texto,
-                    fontSize = 28.sp,
+                    fontSize = textSize,
                     color = Color.White,
                     modifier = Modifier.padding(start = 8.dp)
                 )
