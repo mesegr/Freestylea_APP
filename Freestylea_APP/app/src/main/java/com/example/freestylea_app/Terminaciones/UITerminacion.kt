@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -46,7 +45,6 @@ fun Terminacion(themeGenerator: terminacionGenerator, onBack: () -> Unit) {
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
-            .safeDrawingPadding()
     ) {
         Image(
             painter = painterResource(id = R.drawable.fondo),
@@ -91,7 +89,7 @@ fun Terminacion(themeGenerator: terminacionGenerator, onBack: () -> Unit) {
                         .background(gradient, RoundedCornerShape(50.dp))
                 ) {
                     Text(
-                        "Cambiar temática",
+                        "Cambiar terminación",
                         fontSize = actionTextSize,
                         color = Color.White,
                         maxLines = 1,
@@ -112,6 +110,8 @@ fun Terminacion(themeGenerator: terminacionGenerator, onBack: () -> Unit) {
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                     textAlign = TextAlign.Center,
+                    softWrap = true,
+                    maxLines = 3,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = pagePadding)
