@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 
 class WordGenerator {
 
+   // Elimina repeticiones ignorando mayúsculas y espacios, conservando el primer orden.
    val base_palabras = arrayOf(
     "sol", "mar", "pan", "voz", "rap", "rey", "luz", "fin", "club", "cruz", "gris", "son", "top", "bar",
     "lago", "río", "nube", "pato", "caja", "duro", "alto", "bajo", "verde", "corto", "grueso", "rojo", "dulce",
@@ -96,7 +97,7 @@ class WordGenerator {
     "borrador","cubilete","pergamino","manecilla","manija","desarmador","torniquete","gancho","rodillo","palanca","escalón","portón","garrucha","nicho","rejilla","cortapicos","rompeolas","tornapunta","jaladera","ventosa",
     "picaporte","pomo","cabilla","almohadilla","canasto","escotilla","bombilla","palillero","claxon","rejón","tranca","timón","abrelatas","ménsula","clip","estribera","marquesina","felpudo","gatera","cerradura"
 
-   )
+   ).distinctBy { it.trim().lowercase() }.toTypedArray()
 
    private var job: Job? = null
 
