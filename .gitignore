@@ -1,0 +1,44 @@
+# Android Studio / IntelliJ IDEA
+.idea/**/workspace.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries/
+.idea/**/shelf/
+*.iml
+
+# Gradle
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local Android configuration
+local.properties
+
+# Native build outputs
+.externalNativeBuild/
+.cxx/
+
+# Test and build reports
+**/captures/
+**/reports/
+**/test-results/
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+google-services.json
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
