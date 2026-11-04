@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -71,7 +72,7 @@ fun UIMainMenu(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Buttons("Tematicas", onBotonTematicasClick, buttonTextSize)
-                    Buttons("Palabras aleatorias", onBotonPalabrasClick, buttonTextSize)
+                    Buttons("Palabras aleatorias", onBotonPalabrasClick, buttonTextSize, maxLines = 2)
                     Buttons("Terminaciones", onBotonTerminacionesClick, buttonTextSize)
                 }
             } else {
@@ -81,7 +82,7 @@ fun UIMainMenu(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Buttons("Tematicas", onBotonTematicasClick, buttonTextSize, Modifier.weight(1f))
-                    Buttons("Palabras aleatorias", onBotonPalabrasClick, buttonTextSize, Modifier.weight(1f))
+                    Buttons("Palabras aleatorias", onBotonPalabrasClick, buttonTextSize, Modifier.weight(1f), maxLines = 2)
                     Buttons("Terminaciones", onBotonTerminacionesClick, buttonTextSize, Modifier.weight(1f))
                 }
             }
@@ -94,7 +95,8 @@ private fun Buttons(
     text: String,
     onClick: () -> Unit,
     fontSize: TextUnit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    maxLines: Int = 1
 ) {
     val gradient = Brush.linearGradient(
         colors = listOf(Color(0xFFFF00AA), Color(0xFF0037FF), Color(0xFF4CC9FF))
@@ -105,17 +107,22 @@ private fun Buttons(
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
         modifier = modifier
             .fillMaxWidth()
+            .heightIn(min = 76.dp)
             .padding(4.dp)
             .background(gradient, RoundedCornerShape(30.dp))
     ) {
         Text(
             text = text,
             color = Color.White,
-            fontSize = fontSize,
+            fontSize = (fontSize.value * 0.82f).coerceAtLeast(14f).sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             lineHeight = (fontSize.value * 1.2f).sp,
-            modifier = Modifier.padding(vertical = 18.dp)
+            maxLines = maxLines,
+            softWrap = maxLines > 1,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp, vertical = 12.dp)
         )
     }
 }
