@@ -11,6 +11,13 @@ With this app, you can choose different practice modes:
 
 Challenge yourself and boost your creativity, flow, and improvisation skills!
 
+<p align="center">
+  <img src="img/free1.jpg" width="49%" alt="Menú principal">
+  <img src="img/free2.jpg" width="49%" alt="Tematicas">
+  <img src="img/free3.jpg" width="49%" alt="palabras">
+  <img src="img/free4.jpg" width="49%" alt="Terminaciones">
+</p>
+
 ---
 
 ## 📑 Index
