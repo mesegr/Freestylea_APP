@@ -1,57 +1,50 @@
-# Freestyle Practice App 🎤🔥
+# Freestylea
 
-## 📱 About the App
-
-**Freestyle Practice App** is a mobile application designed for all freestyle rap lovers who want to practice and improve their skills anywhere, anytime. 
-
-With this app, you can choose different practice modes:
-- **Rhyme endings**
-- **Themes**
-- **Random words**
-
-Challenge yourself and boost your creativity, flow, and improvisation skills!
+App de Android para practicar freestyle. Te da material al azar para improvisar: terminaciones de rima, temáticas o palabras que cambian cada pocos segundos.
 
 <p align="center">
-  <img src="img/free1.jpg" width="49%" alt="Menú principal">
-  <img src="img/free2.jpg" width="49%" alt="Tematicas">
-  <img src="img/free3.jpg" width="49%" alt="palabras">
-  <img src="img/free4.jpg" width="49%" alt="Terminaciones">
+  <img src="img/free1.jpg" width="49%" alt="Menú principal de Freestylea">
+  <img src="img/free2.jpg" width="49%" alt="Pantalla de temáticas">
+  <img src="img/free3.jpg" width="49%" alt="Pantalla de palabras aleatorias">
+  <img src="img/free4.jpg" width="49%" alt="Pantalla de terminaciones">
 </p>
 
----
+## Modos de práctica
 
-## 📑 Index
+- **Terminaciones:** sufijos de rima al azar (-ar, -ente, -illo...) para que construyas los versos a partir de ellos.
+- **Temáticas:** un listado amplio de temas (animales, mitología, espacio...) para improvisar sobre ellos.
+- **Palabras:** más de 800 palabras que van apareciendo cada cierto tiempo (10 segundos por defecto, configurable).
 
-- [📱 About the App](#-about-the-app)
-- [📥 Downloads](#-downloads)
-- [🚀 Features](#-features)
-- [🐛 Reporting Bugs & Feedback](#-reporting-bugs--feedback)
+## Descarga
 
----
+[Freestylea 1.0.0 (APK)](https://github.com/mesegr/Freestylea_APP/releases/download/V1.0.0/Download.Freestylea.apk)
 
-## 📥 Downloads
+Requiere Android 7.0 o superior. Al instalarlo, Android puede pedirte permiso para instalar apps de orígenes desconocidos.
 
-You can download the app here:
+## Tecnologías
 
-- [Download Freestylea 1.0.0](https://github.com/mesegr/Freestylea_APP/releases/tag/V1.0.0)
+- Kotlin y Jetpack Compose
+- Corrutinas para el flujo temporizado de palabras
+- minSdk 24, targetSdk 35
 
----
+## Estructura
 
-## 🚀 Features
+```
+Freestylea_APP/app/src/main/java/com/example/freestylea_app/
+├── MainActivity.kt / UIMainMenu.kt   # Entrada y menú principal
+├── Terminaciones/                    # Generador y pantalla de terminaciones
+├── themes/                           # Generador y pantalla de temáticas
+├── words/                            # Palabras aleatorias con intervalo
+└── ui/theme/                         # Tema de la app
+```
 
-✅ Practice with random rhyme endings  
-✅ Choose specific themes to focus on  
-✅ Get random words to freestyle about  
-✅ Simple, clean, and intuitive interface  
-✅ Ideal for beginners and experienced freestylers 
+## Cómo compilar
 
----
+1. Instala una versión reciente de Android Studio.
+2. Clona el repo: `git clone https://github.com/mesegr/Freestylea_APP.git`
+3. Abre la carpeta `Freestylea_APP` con Android Studio y espera a que Gradle sincronice.
+4. Pulsa **Run** con un emulador o un móvil conectado.
 
-## 🐛 **Reporting Bugs & Feedback**  
-Found a bug? Have suggestions?  
-- Open an **Issue** on this repo.  
+## Errores y sugerencias
 
-Please include:  
-- **Description**: What happened?  
-- **Steps to reproduce**: How can we trigger it?  
-- **Screenshots/Videos** (if possible).  
+Abre una [issue](https://github.com/mesegr/Freestylea_APP/issues) indicando qué pasó y cómo reproducirlo.
